@@ -1,0 +1,42 @@
+name: PR API VERSION Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check JSON ↔ VERSION consistency
+        shell: bash
+        run: |
+          set -e
+
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+
+          CHANGED_FILES=$(git diff --name-only "$BASE" "$HEAD")
+
+          echo "$CHANGED_FILES"
+
+          APIS=$(echo "$CHANGED_FILES" \
+            | grep -E '.*/(json-rpc|rest-api)/' \
+            | awk -F/ '{print $1"/"$2}' \
+            | sort -u)
+
+          for API in $APIS; do
+            SPEC_CHANGED=$(echo "$CHANGED_FILES" | grep -E "$API/.*/(openrpc|openapi)\.json" || true)
+            VERSION_CHANGED=$(echo "$CHANGED_FILES" | grep -E "$API/.*/VERSION" || true)
+
+            if [[ -n "$SPEC_CHANGED" && -z "$VERSION_CHANGED" ]]; then
+              echo "ERROR:"
+              echo "Spec file changed but VERSION not updated for $API"
+              exit 1
+            fi
+          done
