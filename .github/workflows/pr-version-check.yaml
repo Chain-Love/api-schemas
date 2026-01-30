@@ -56,11 +56,11 @@ jobs:
         shell: bash
         run: |
           set -e
-
+      
           for API in ${{ steps.detect.outputs.apis }}; do
             if [[ "$API" == */json-rpc ]]; then
-              npx @redocly/cli lint "$API/json-rpc/openrpc.json"
+              npx @redocly/cli@2.15.0 lint "$API/openrpc.json"
             else
-              npx @redocly/cli lint "$API/rest-api/openapi.json"
+              npx @redocly/cli@2.15.0 lint "$API/openapi.json"
             fi
           done
