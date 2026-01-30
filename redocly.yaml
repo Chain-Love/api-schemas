@@ -1,0 +1,11 @@
+extends: []
+
+rules:
+  struct: error
+  # Open-RPC
+  no-unresolved-refs: error
+  no-unused-components: warn
+  spec-no-duplicated-method-params: error
+  spec-no-required-params-after-optional: error
+  info-contact: warn
+  info-license: warn
