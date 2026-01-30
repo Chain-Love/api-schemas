@@ -59,10 +59,8 @@ jobs:
 
           for API in ${{ steps.detect.outputs.apis }}; do
             if [[ "$API" == */json-rpc ]]; then
-              npm install -g @open-rpc/validator
-              openrpc-validator validate "$API/json-rpc/openrpc.json"
+              npx @open-rpc/schema-utils validate "$API/json-rpc/openrpc.json"
             else
-              npm install -g @redocly/cli
-              redocly lint "$API/rest-api/openapi.json"
+              npx @redocly/cli lint "$API/rest-api/openapi.json"
             fi
           done
