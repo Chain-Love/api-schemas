@@ -53,7 +53,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          VERSION=$(cat ${{ matrix.api }}/*/VERSION)
+          VERSION=$(cat ${{ matrix.api }}/VERSION)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
