@@ -43,8 +43,8 @@ jobs:
           CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
           for API in ${{ steps.detect.outputs.apis }}; do
-            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/.*/(openrpc|openapi)\.json" || true)
-            VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/.*/VERSION" || true)
+            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/(openrpc|openapi)\.json" || true)
+            VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/VERSION" || true)
 
             if [[ -n "$SPEC_CHANGED" && -z "$VERSION_CHANGED" ]]; then
               echo "ERROR: Spec changed but VERSION not updated for $API"
