@@ -1,0 +1,83 @@
+name: API Spec Release
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/json-rpc/**'
+      - '**/rest-api/**'
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: matrix
+        shell: bash
+        run: |
+          set -e
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          CHANGED=$(git diff --name-only "$BEFORE" "$AFTER")
+
+          # Release trigger = VERSION change
+          MATRIX=$(echo "$CHANGED" \
+            | grep -E '.*/(json-rpc|rest-api)/VERSION' \
+            | awk -F/ '{print $1"/"$2}' \
+            | sort -u \
+            | jq -R -s -c 'split("\n")[:-1]')
+
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: detect
+    if: needs.detect.outputs.matrix != '[]'
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        api: ${{ fromJson(needs.detect.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read VERSION
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(cat ${{ matrix.api }}/*/VERSION)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+
+          API="${{ matrix.api }}"
+          VERSION="${{ steps.version.outputs.version }}"
+
+          BLOCKCHAIN=$(echo "$API" | cut -d/ -f1)
+          API_TYPE=$(echo "$API" | cut -d/ -f2)
+
+          TAG="${BLOCKCHAIN}-${API_TYPE}-v${VERSION}"
+
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+            exit 0
+          fi
+
+          gh release create "$TAG" \
+            "$API"/*/*.json \
+            "$API"/*/CHANGELOG.md \
+            --title "$TAG" \
+            --notes-file "$API"/*/CHANGELOG.md
