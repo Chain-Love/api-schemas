@@ -16,8 +16,6 @@ The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follo
 
 - Updated schema description
 
-## [0.0.2] - 2026-01-30
-
 ### Added
 
 - Added contact field
