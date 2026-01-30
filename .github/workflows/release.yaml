@@ -77,7 +77,7 @@ jobs:
           fi
 
           gh release create "$TAG" \
-            "$API"/*/*.json \
-            "$API"/*/CHANGELOG.md \
+            "$API"/*.json \
+            "$API"/CHANGELOG.md \
             --title "$TAG" \
-            --notes-file "$API"/*/CHANGELOG.md
+            --notes-file "$API"/CHANGELOG.md
