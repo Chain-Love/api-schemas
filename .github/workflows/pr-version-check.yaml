@@ -52,14 +52,14 @@ jobs:
             fi
           done
 
-      - name: Validate API specs
+      - name: Lint OpenAPI / Open-RPC
         shell: bash
         run: |
           set -e
 
           for API in ${{ steps.detect.outputs.apis }}; do
             if [[ "$API" == */json-rpc ]]; then
-              npx @open-rpc/schema-utils validate "$API/json-rpc/openrpc.json"
+              npx @redocly/cli lint "$API/json-rpc/openrpc.json"
             else
               npx @redocly/cli lint "$API/rest-api/openapi.json"
             fi
