@@ -3,7 +3,8 @@
         "info": {
                 "title": "Ethereum JSON-RPC Specification",
                 "description": "A specification of the Ethereum execution JSON-RPC API provided by Chain.Love platform.",
-                "version": "0.0.1"
+                "version": "0.0.1",
+                "contact": "dev@chain.love"
         },
         "methods": [
                 {
