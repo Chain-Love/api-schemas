@@ -1,11 +1,11 @@
-name: PR API VERSION Check
+name: PR API Checks
 
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  version-check:
+  api-check:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,7 +13,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check JSON ↔ VERSION consistency
+      - name: Detect changed APIs
+        id: detect
         shell: bash
         run: |
           set -e
@@ -21,22 +22,47 @@ jobs:
           BASE="${{ github.event.pull_request.base.sha }}"
           HEAD="${{ github.event.pull_request.head.sha }}"
 
-          CHANGED_FILES=$(git diff --name-only "$BASE" "$HEAD")
+          CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
-          echo "$CHANGED_FILES"
-
-          APIS=$(echo "$CHANGED_FILES" \
+          APIS=$(echo "$CHANGED" \
             | grep -E '.*/(json-rpc|rest-api)/' \
             | awk -F/ '{print $1"/"$2}' \
             | sort -u)
 
-          for API in $APIS; do
-            SPEC_CHANGED=$(echo "$CHANGED_FILES" | grep -E "$API/.*/(openrpc|openapi)\.json" || true)
-            VERSION_CHANGED=$(echo "$CHANGED_FILES" | grep -E "$API/.*/VERSION" || true)
+          echo "apis<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$APIS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Enforce VERSION bump
+        shell: bash
+        run: |
+          set -e
+
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          CHANGED=$(git diff --name-only "$BASE" "$HEAD")
+
+          for API in ${{ steps.detect.outputs.apis }}; do
+            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/.*/(openrpc|openapi)\.json" || true)
+            VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/.*/VERSION" || true)
 
             if [[ -n "$SPEC_CHANGED" && -z "$VERSION_CHANGED" ]]; then
-              echo "ERROR:"
-              echo "Spec file changed but VERSION not updated for $API"
+              echo "ERROR: Spec changed but VERSION not updated for $API"
               exit 1
+            fi
+          done
+
+      - name: Validate API specs
+        shell: bash
+        run: |
+          set -e
+
+          for API in ${{ steps.detect.outputs.apis }}; do
+            if [[ "$API" == */json-rpc ]]; then
+              npm install -g @open-rpc/validator
+              openrpc-validator validate "$API/json-rpc/openrpc.json"
+            else
+              npm install -g @redocly/cli
+              redocly lint "$API/rest-api/openapi.json"
             fi
           done
