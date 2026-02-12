@@ -28,7 +28,6 @@ jobs:
 
           CHANGED=$(git diff --name-only "$BEFORE" "$AFTER")
 
-          # Release trigger = VERSION change
           MATRIX=$(echo "$CHANGED" \
             | grep -E '.*/(json-rpc|rest-api)/VERSION' \
             | awk -F/ '{print $1"/"$2}' \
@@ -58,6 +57,38 @@ jobs:
           VERSION=$(cat ${{ matrix.api }}/VERSION)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
+      - name: Resolve spec file
+        id: spec
+        shell: bash
+        run: |
+          set -e
+
+          API="${{ matrix.api }}"
+          API_TYPE=$(echo "$API" | cut -d/ -f2)
+
+          case "$API_TYPE" in
+            json-rpc)
+              SPEC_FILE="openrpc.json"
+              ;;
+            rest-api)
+              SPEC_FILE="openapi.json"
+              ;;
+            *)
+              echo "Unknown API type: $API_TYPE"
+              exit 1
+              ;;
+          esac
+
+          FULL_PATH="$API/$SPEC_FILE"
+
+          if [[ ! -f "$FULL_PATH" ]]; then
+            echo "ERROR: Spec file not found: $FULL_PATH"
+            exit 1
+          fi
+
+          echo "spec_file=$FULL_PATH" >> "$GITHUB_OUTPUT"
+          echo "api_type=$API_TYPE" >> "$GITHUB_OUTPUT"
+
       - name: Create GitHub Release
         shell: bash
         env:
@@ -67,6 +98,7 @@ jobs:
 
           API="${{ matrix.api }}"
           VERSION="${{ steps.version.outputs.version }}"
+          SPEC_FILE="${{ steps.spec.outputs.spec_file }}"
 
           BLOCKCHAIN=$(echo "$API" | cut -d/ -f1)
           API_TYPE=$(echo "$API" | cut -d/ -f2)
@@ -80,21 +112,21 @@ jobs:
               flag {print}
             ' "$API/CHANGELOG.md"
           }
-      
+
           NOTES=$(extract_changelog)
-      
+
           if [[ -z "$NOTES" ]]; then
             echo "ERROR: Missing changelog section for $VERSION"
             exit 1
           fi
-      
+
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists"
             exit 0
           fi
-      
+
           gh release create "$TAG" \
-            "$API/openrpc.json" \
+            "$SPEC_FILE" \
             "$API/CHANGELOG.md" \
             --title "$TAG" \
             --notes "$NOTES"
