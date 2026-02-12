@@ -845,14 +845,6 @@
         },
         "type": "object"
       },
-      "Hashtype": {
-        "description": "The type of hash function used to create the proof, must be one of: \n* sha512_256 \n* sha256",
-        "enum": [
-          "sha512_256",
-          "sha256"
-        ],
-        "type": "string"
-      },
       "HbProofFields": {
         "description": "\\[hbprf\\] HbProof is a signature using HeartbeatAddress's partkey, thereby showing it is online.",
         "properties": {
@@ -1907,7 +1899,8 @@
         "summary": "Returns 200 if healthy.",
         "tags": [
           "common"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts": {
@@ -2097,7 +2090,8 @@
         },
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}": {
@@ -2245,7 +2239,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}/apps-local-state": {
@@ -2395,7 +2390,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}/assets": {
@@ -2545,7 +2541,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}/created-applications": {
@@ -2695,7 +2692,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}/created-assets": {
@@ -2845,7 +2843,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/accounts/{account-id}/transactions": {
@@ -3083,7 +3082,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/applications": {
@@ -3188,7 +3188,8 @@
         },
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/applications/{application-id}": {
@@ -3283,7 +3284,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/applications/{application-id}/box": {
@@ -3390,7 +3392,8 @@
         "summary": "Get box information for a given application.",
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/applications/{application-id}/boxes": {
@@ -3524,7 +3527,8 @@
         "summary": "Get box names for a given application.",
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/applications/{application-id}/logs": {
@@ -3629,7 +3633,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/assets": {
@@ -3772,7 +3777,8 @@
         },
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/assets/{asset-id}": {
@@ -3890,7 +3896,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/assets/{asset-id}/balances": {
@@ -4025,7 +4032,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/assets/{asset-id}/transactions": {
@@ -4285,7 +4293,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/block-headers": {
@@ -4468,7 +4477,8 @@
         },
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/blocks/{round-number}": {
@@ -4552,7 +4562,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/transactions": {
@@ -4830,7 +4841,8 @@
         },
         "tags": [
           "search"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     },
     "/v2/transactions/{txid}": {
@@ -4940,7 +4952,8 @@
         },
         "tags": [
           "lookup"
-        ]
+        ],
+        "x-cu-cost": 1
       }
     }
   },
