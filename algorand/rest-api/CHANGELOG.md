@@ -9,3 +9,9 @@ The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follo
 ### Added
 
 - Initial version of the spec
+
+## [0.0.2] - 2026-02-12
+
+### Changed
+
+- Minor changes to test pipeline

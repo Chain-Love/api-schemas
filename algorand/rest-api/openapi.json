@@ -3,7 +3,7 @@
   "info": {
     "title": "Algorand REST API Specification",
     "description": "A specification of the Algorand algod REST API provided by Chain.Love platform.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "contact": {
       "name": "devs",
       "email": "devs@chain.love"
