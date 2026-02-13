@@ -34,7 +34,7 @@ jobs:
           echo "$APIS" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
 
-      - name: Enforce VERSION bump
+      - name: Enforce VERSION bump on spec change
         shell: bash
         run: |
           set -euo pipefail
@@ -54,7 +54,7 @@ jobs:
             fi
           done <<< "$APIS"
 
-      - name: Enforce CHANGELOG entry for version
+      - name: Enforce CHANGELOG section for version
         shell: bash
         run: |
           set -euo pipefail
@@ -63,23 +63,13 @@ jobs:
           [[ -z "$APIS" ]] && exit 0
 
           while IFS= read -r API; do
-            VERSION_FILE="$API/VERSION"
-            CHANGELOG="$API/CHANGELOG.md"
+            VERSION=$(tr -d '[:space:]' < "$API/VERSION")
 
-            [[ ! -f "$VERSION_FILE" ]] && continue
-            [[ ! -f "$CHANGELOG" ]] && {
-              echo "ERROR: $CHANGELOG is missing for $API"
-              exit 1
-            }
-
-            VERSION=$(tr -d '[:space:]' < "$VERSION_FILE")
-
-            if ! grep -Eq "^##[[:space:]]+\[$VERSION\]([[:space:]]+-.*)?$" "$CHANGELOG"; then
+            if ! grep -Eq "^##[[:space:]]+\[$VERSION\]([[:space:]]+-.*)?$" "$API/CHANGELOG.md"; then
               echo "ERROR: CHANGELOG for $API does not contain section for version [$VERSION]"
               exit 1
             fi
           done <<< "$APIS"
-
 
       - name: Lint OpenAPI / OpenRPC
         shell: bash
