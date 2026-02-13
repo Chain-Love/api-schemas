@@ -8,6 +8,10 @@ jobs:
   api-check:
     runs-on: ubuntu-latest
 
+    env:
+      BASE: ${{ github.event.pull_request.base.sha }}
+      HEAD: ${{ github.event.pull_request.head.sha }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -17,15 +21,12 @@ jobs:
         id: detect
         shell: bash
         run: |
-          set -e
-
-          BASE="${{ github.event.pull_request.base.sha }}"
-          HEAD="${{ github.event.pull_request.head.sha }}"
+          set -euo pipefail
 
           CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
           APIS=$(echo "$CHANGED" \
-            | grep -E '.*/(json-rpc|rest-api)/' \
+            | grep -E '.*/(json-rpc|rest-api)/' || true \
             | awk -F/ '{print $1"/"$2}' \
             | sort -u)
 
@@ -36,13 +37,14 @@ jobs:
       - name: Enforce VERSION bump
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
-          BASE="${{ github.event.pull_request.base.sha }}"
-          HEAD="${{ github.event.pull_request.head.sha }}"
+          APIS="${{ steps.detect.outputs.apis }}"
+          [[ -z "$APIS" ]] && exit 0
+
           CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
-          for API in ${{ steps.detect.outputs.apis }}; do
+          while IFS= read -r API; do
             SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/(openrpc|openapi)\.json" || true)
             VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/VERSION" || true)
 
@@ -50,17 +52,47 @@ jobs:
               echo "ERROR: Spec changed but VERSION not updated for $API"
               exit 1
             fi
-          done
+          done <<< "$APIS"
 
-      - name: Lint OpenAPI / Open-RPC
+      - name: Enforce CHANGELOG entry for version
         shell: bash
         run: |
-          set -e
-      
-          for API in ${{ steps.detect.outputs.apis }}; do
+          set -euo pipefail
+
+          APIS="${{ steps.detect.outputs.apis }}"
+          [[ -z "$APIS" ]] && exit 0
+
+          while IFS= read -r API; do
+            VERSION_FILE="$API/VERSION"
+            CHANGELOG="$API/CHANGELOG.md"
+
+            [[ ! -f "$VERSION_FILE" ]] && continue
+            [[ ! -f "$CHANGELOG" ]] && {
+              echo "ERROR: $CHANGELOG is missing for $API"
+              exit 1
+            }
+
+            VERSION=$(tr -d '[:space:]' < "$VERSION_FILE")
+
+            if ! grep -Eq "^##[[:space:]]+\[$VERSION\]([[:space:]]+-.*)?$" "$CHANGELOG"; then
+              echo "ERROR: CHANGELOG for $API does not contain section for version [$VERSION]"
+              exit 1
+            fi
+          done <<< "$APIS"
+
+
+      - name: Lint OpenAPI / OpenRPC
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          APIS="${{ steps.detect.outputs.apis }}"
+          [[ -z "$APIS" ]] && exit 0
+
+          while IFS= read -r API; do
             if [[ "$API" == */json-rpc ]]; then
               npx @redocly/cli@2.15.0 lint "$API/openrpc.json"
             else
               npx @redocly/cli@2.15.0 lint "$API/openapi.json"
             fi
-          done
+          done <<< "$APIS"
