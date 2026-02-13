@@ -26,7 +26,7 @@ jobs:
           CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
           APIS=$(echo "$CHANGED" \
-            | grep -E '.*/(json-rpc|rest-api)/' || true \
+            | grep -E '.*/(json-rpc|rest-api)/' \
             | awk -F/ '{print $1"/"$2}' \
             | sort -u)
 
