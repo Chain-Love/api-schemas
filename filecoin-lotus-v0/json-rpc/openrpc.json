@@ -4674,6 +4674,7 @@
       "x-cu-cost": 1
     },
     {
+      "description": "Returns a list of Ethereum-compatible account addresses managed by the node.",
       "name": "Filecoin.EthAccounts",
       "paramStructure": "by-position",
       "params": [],
@@ -4695,10 +4696,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns available Ethereum-style accounts.",
       "x-cu-cost": 1
     },
     {
+      "description": "Converts an Ethereum-style address into the corresponding f410 Filecoin address.",
       "name": "Filecoin.EthAddressToFilecoinAddress",
       "paramStructure": "by-position",
       "params": [
@@ -4743,10 +4745,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Converts an Ethereum address to a Filecoin address.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the height of the latest (heaviest) Filecoin tipset, formatted as an Ethereum block number.",
       "name": "Filecoin.EthBlockNumber",
       "paramStructure": "by-position",
       "params": [],
@@ -4766,10 +4769,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the latest block number.",
       "x-cu-cost": 1
     },
     {
+      "description": "Executes an Ethereum-style call against the current state without submitting a transaction or modifying chain state.",
       "name": "Filecoin.EthCall",
       "paramStructure": "by-position",
       "params": [
@@ -4829,10 +4833,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Executes a call without making state changes.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the Ethereum-compatible chain ID used by the Filecoin network.",
       "name": "Filecoin.EthChainId",
       "paramStructure": "by-position",
       "params": [],
@@ -4852,10 +4857,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the chain ID.",
       "x-cu-cost": 1
     },
     {
+      "description": "Estimates the amount of gas that would be consumed by executing the given transaction.",
       "name": "Filecoin.EthEstimateGas",
       "paramStructure": "by-position",
       "params": [
@@ -4892,10 +4898,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Estimates gas required for a transaction.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns historical base fee and priority fee information for recent blocks.",
       "name": "Filecoin.EthFeeHistory",
       "paramStructure": "by-position",
       "params": [
@@ -4941,10 +4948,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns historical gas fee data.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the current suggested gas price for Ethereum-style transactions.",
       "name": "Filecoin.EthGasPrice",
       "paramStructure": "by-position",
       "params": [],
@@ -4964,10 +4972,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the current gas price.",
       "x-cu-cost": 2
     },
     {
+      "description": "Returns the balance of the given address at the specified block.",
       "name": "Filecoin.EthGetBalance",
       "paramStructure": "by-position",
       "params": [
@@ -5020,10 +5029,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns account balance.",
       "x-cu-cost": 10
     },
     {
+      "description": "Returns block information corresponding to the given block hash.",
       "name": "Filecoin.EthGetBlockByHash",
       "paramStructure": "by-position",
       "params": [
@@ -5100,10 +5110,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a block by hash.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns block information for the specified block number or tag.",
       "name": "Filecoin.EthGetBlockByNumber",
       "paramStructure": "by-position",
       "params": [
@@ -5180,10 +5191,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a block by number.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the number of messages in the tipset identified by the given block hash.",
       "name": "Filecoin.EthGetBlockTransactionCountByHash",
       "paramStructure": "by-position",
       "params": [
@@ -5220,10 +5232,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns transaction count for a block.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the number of messages in the tipset identified by the given block number.",
       "name": "Filecoin.EthGetBlockTransactionCountByNumber",
       "paramStructure": "by-position",
       "params": [
@@ -5260,10 +5273,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns transaction count for a block.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the contract bytecode stored at the given address and block.",
       "name": "Filecoin.EthGetCode",
       "paramStructure": "by-position",
       "params": [
@@ -5316,10 +5330,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns contract bytecode.",
       "x-cu-cost": 10
     },
     {
+      "description": "Polling method that returns event logs that occurred since the last filter poll.",
       "name": "Filecoin.EthGetFilterChanges",
       "paramStructure": "by-position",
       "params": [
@@ -5360,10 +5375,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns filter changes since last poll.",
       "x-cu-cost": 400
     },
     {
+      "description": "Returns all event logs matching the filter associated with the given filter ID.",
       "name": "Filecoin.EthGetFilterLogs",
       "paramStructure": "by-position",
       "params": [
@@ -5404,10 +5420,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns all logs for a filter.",
       "x-cu-cost": 400
     },
     {
+      "description": "Returns event logs that match the given filter specification.",
       "name": "Filecoin.EthGetLogs",
       "paramStructure": "by-position",
       "params": [
@@ -5454,10 +5471,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns logs matching a filter.",
       "x-cu-cost": 400
     },
     {
+      "description": "Returns the Filecoin message CID corresponding to the given Ethereum transaction hash.",
       "name": "Filecoin.EthGetMessageCidByTransactionHash",
       "paramStructure": "by-position",
       "params": [
@@ -5494,10 +5512,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Maps transaction hash to message CID.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the value from a contract\u0432\u0402\u2122s storage slot at the given position and block.",
       "name": "Filecoin.EthGetStorageAt",
       "paramStructure": "by-position",
       "params": [
@@ -5566,10 +5585,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns contract storage value.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns detailed information about the transaction identified by the given hash.",
       "name": "Filecoin.EthGetTransactionByHash",
       "paramStructure": "by-position",
       "params": [
@@ -5628,10 +5648,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a transaction by hash.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns transaction information with response size or field limitations applied.",
       "name": "Filecoin.EthGetTransactionByHashLimited",
       "paramStructure": "by-position",
       "params": [
@@ -5706,10 +5727,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a transaction by hash with limits.",
       "x-cu-cost": 8
     },
     {
+      "description": "Returns the number of transactions sent from an address up to the specified block.",
       "name": "Filecoin.EthGetTransactionCount",
       "paramStructure": "by-position",
       "params": [
@@ -5762,10 +5784,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns account nonce.",
       "x-cu-cost": 4
     },
     {
+      "description": "Returns the Ethereum-style transaction hash corresponding to a Filecoin message CID.",
       "name": "Filecoin.EthGetTransactionHashByCid",
       "paramStructure": "by-position",
       "params": [
@@ -5802,10 +5825,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Maps message CID to transaction hash.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the receipt for a transaction, including execution status and logs.",
       "name": "Filecoin.EthGetTransactionReceipt",
       "paramStructure": "by-position",
       "params": [
@@ -5872,10 +5896,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns transaction receipt.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns a transaction receipt with response size or field limitations applied.",
       "name": "Filecoin.EthGetTransactionReceiptLimited",
       "paramStructure": "by-position",
       "params": [
@@ -5958,10 +5983,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns transaction receipt with limits.",
       "x-cu-cost": 34
     },
     {
+      "description": "Returns the maximum suggested priority fee per gas for transactions.",
       "name": "Filecoin.EthMaxPriorityFeePerGas",
       "paramStructure": "by-position",
       "params": [],
@@ -5981,10 +6007,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns max priority fee.",
       "x-cu-cost": 1
     },
     {
+      "description": "Installs a persistent filter that notifies when new blocks are added to the chain.",
       "name": "Filecoin.EthNewBlockFilter",
       "paramStructure": "by-position",
       "params": [],
@@ -6004,10 +6031,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Creates a new block filter.",
       "x-cu-cost": 1
     },
     {
+      "description": "Installs a persistent filter based on the given log filter specification.",
       "name": "Filecoin.EthNewFilter",
       "paramStructure": "by-position",
       "params": [
@@ -6050,10 +6078,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Creates a new log filter.",
       "x-cu-cost": 1
     },
     {
+      "description": "Installs a persistent filter that notifies when new messages enter the message pool.",
       "name": "Filecoin.EthNewPendingTransactionFilter",
       "paramStructure": "by-position",
       "params": [],
@@ -6073,10 +6102,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Creates a pending transaction filter.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the supported Ethereum protocol version.",
       "name": "Filecoin.EthProtocolVersion",
       "paramStructure": "by-position",
       "params": [],
@@ -6096,10 +6126,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns protocol version.",
       "x-cu-cost": 1
     },
     {
+      "description": "Submits a signed Ethereum-style transaction to the network.",
       "name": "Filecoin.EthSendRawTransaction",
       "paramStructure": "by-position",
       "params": [
@@ -6136,10 +6167,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Submits a raw transaction.",
       "x-cu-cost": 18
     },
     {
+      "description": "Subscribes to selected event types using a websocket connection.",
       "name": "Filecoin.EthSubscribe",
       "paramStructure": "by-position",
       "params": [
@@ -6176,10 +6208,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Subscribes to events over websockets.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns information about the node\u0432\u0402\u2122s current synchronization status.",
       "name": "Filecoin.EthSyncing",
       "paramStructure": "by-position",
       "params": [],
@@ -6199,10 +6232,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns sync status.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns execution traces for all transactions in the specified block.",
       "name": "Filecoin.EthTraceBlock",
       "paramStructure": "by-position",
       "params": [
@@ -6254,10 +6288,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Traces all transactions in a block.",
       "x-cu-cost": 7
     },
     {
+      "description": "Replays all transactions in a block and returns the requested traces for each transaction.",
       "name": "Filecoin.EthTraceReplayBlockTransactions",
       "paramStructure": "by-position",
       "params": [
@@ -6331,10 +6366,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Replays and traces block transactions.",
       "x-cu-cost": 11
     },
     {
+      "description": "Returns execution trace information for the specified transaction.",
       "name": "Filecoin.EthTraceTransaction",
       "paramStructure": "by-position",
       "params": [
@@ -6446,10 +6482,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Traces a transaction.",
       "x-cu-cost": 1
     },
     {
+      "description": "Uninstalls the filter identified by the given filter ID.",
       "name": "Filecoin.EthUninstallFilter",
       "paramStructure": "by-position",
       "params": [
@@ -6484,10 +6521,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Removes an installed filter.",
       "x-cu-cost": 1
     },
     {
+      "description": "Terminates an active websocket subscription.",
       "name": "Filecoin.EthUnsubscribe",
       "paramStructure": "by-position",
       "params": [
@@ -6522,7 +6560,7 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Unsubscribes from websocket events.",
       "x-cu-cost": 1
     },
     {
