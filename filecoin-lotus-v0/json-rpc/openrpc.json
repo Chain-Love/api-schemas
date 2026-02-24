@@ -677,17 +677,34 @@
         "type": "array"
       },
       "EthTraceItem": {
-        "type": "object",
         "additionalProperties": false,
         "properties": {
-          "action": { "$ref": "#/components/schemas/EthTraceAction" },
-          "result": { "$ref": "#/components/schemas/EthTraceResult" },
-          "type": { "type": "string" },
-          "error": { "type": "string" },
-          "subtraces": { "type": "integer" },
-          "traceAddress": { "$ref": "#/components/schemas/TraceAddress" }
+          "action": {
+            "$ref": "#/components/schemas/EthTraceAction"
+          },
+          "error": {
+            "type": "string"
+          },
+          "result": {
+            "$ref": "#/components/schemas/EthTraceResult"
+          },
+          "subtraces": {
+            "type": "integer"
+          },
+          "traceAddress": {
+            "$ref": "#/components/schemas/TraceAddress"
+          },
+          "type": {
+            "type": "string"
+          }
         },
-        "required": ["action", "type", "subtraces", "traceAddress"]
+        "required": [
+          "action",
+          "type",
+          "subtraces",
+          "traceAddress"
+        ],
+        "type": "object"
       },
       "EthTraceReplayBlockTransaction": {
         "additionalProperties": false,
@@ -3011,6 +3028,7 @@
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the block specified by the given CID.",
       "name": "Filecoin.ChainGetBlock",
       "paramStructure": "by-position",
       "params": [
@@ -3097,10 +3115,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the block specified by the given CID.",
       "x-cu-cost": 7
     },
     {
+      "description": "Returns messages stored in the specified block.",
       "name": "Filecoin.ChainGetBlockMessages",
       "paramStructure": "by-position",
       "params": [
@@ -3315,10 +3334,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns messages stored in the specified block.",
       "x-cu-cost": 2
     },
     {
+      "description": "Returns the events under an event AMT root CID.",
       "name": "Filecoin.ChainGetEvents",
       "paramStructure": "by-position",
       "params": [
@@ -3405,10 +3425,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the events under an event AMT root CID.",
       "x-cu-cost": 40
     },
     {
+      "description": "Returns the genesis tipset.",
       "name": "Filecoin.ChainGetGenesis",
       "paramStructure": "by-position",
       "params": [],
@@ -3495,10 +3516,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the genesis tipset.",
       "x-cu-cost": 1
     },
     {
+      "description": "Reads a message referenced by the specified CID from the chain blockstore.",
       "name": "Filecoin.ChainGetMessage",
       "paramStructure": "by-position",
       "params": [
@@ -3592,10 +3614,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Reads a message referenced by the specified CID from the chain blockstore.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns messages stored in the current tipset.",
       "name": "Filecoin.ChainGetMessagesInTipset",
       "paramStructure": "by-position",
       "params": [
@@ -3682,10 +3705,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns messages stored in the current tipset.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns messages stored in the parent tipset of the specified block.",
       "name": "Filecoin.ChainGetParentMessages",
       "paramStructure": "by-position",
       "params": [
@@ -3768,10 +3792,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns messages stored in the parent tipset of the specified block.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns receipts for messages in the parent tipset of the specified block. The receipts are one-to-one with the messages returned by ChainGetParentMessages for the same block CID.",
       "name": "Filecoin.ChainGetParentReceipts",
       "paramStructure": "by-position",
       "params": [
@@ -3843,10 +3868,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns receipts for messages in the parent tipset of the specified block.",
       "x-cu-cost": 2
     },
     {
+      "description": "Returns a set of revert and apply operations needed to transition from one tipset to another.",
       "name": "Filecoin.ChainGetPath",
       "paramStructure": "by-position",
       "params": [
@@ -3999,10 +4025,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a set of revert and apply operations between two tipsets.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the tipset specified by the given TipSetKey.",
       "name": "Filecoin.ChainGetTipSet",
       "paramStructure": "by-position",
       "params": [
@@ -4112,10 +4139,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the tipset specified by the given TipSetKey.",
       "x-cu-cost": 1
     },
     {
+      "description": "Looks back for a tipset at the specified epoch; if none exist, returns the first non-nil tipset at a later epoch.",
       "name": "Filecoin.ChainGetTipSetAfterHeight",
       "paramStructure": "by-position",
       "params": [
@@ -4241,10 +4269,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the first tipset at or after the specified epoch.",
       "x-cu-cost": 1
     },
     {
+      "description": "Looks back for a tipset at the specified epoch; if none exist, returns a tipset at an earlier epoch.",
       "name": "Filecoin.ChainGetTipSetByHeight",
       "paramStructure": "by-position",
       "params": [
@@ -4370,10 +4399,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns a tipset at or before the specified epoch.",
       "x-cu-cost": 3
     },
     {
+      "description": "Checks whether a given CID exists in the chain blockstore.",
       "name": "Filecoin.ChainHasObj",
       "paramStructure": "by-position",
       "params": [
@@ -4410,10 +4440,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Checks whether a given CID exists in the chain blockstore.",
       "x-cu-cost": 1
     },
     {
+      "description": "Returns the current head of the chain.",
       "name": "Filecoin.ChainHead",
       "paramStructure": "by-position",
       "params": [],
@@ -4500,11 +4531,11 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Returns the current head of the chain.",
       "x-cu-cost": 1
     },
     {
-      "description": "ChainNotify returns channel with chain head updates. First message is guaranteed to be of len == 1, and type == 'current'.",
+      "description": "Returns a channel with chain head updates; the first message is guaranteed to be of length 1 and type \"current\".",
       "name": "Filecoin.ChainNotify",
       "paramStructure": "by-position",
       "params": [],
@@ -4533,10 +4564,11 @@
         },
         "summary": ""
       },
-      "summary": "Chain head updates stream",
+      "summary": "Returns a channel providing chain head updates.",
       "x-cu-cost": 1
     },
     {
+      "description": "Puts a given object into the chain blockstore.",
       "name": "Filecoin.ChainPutObj",
       "paramStructure": "by-position",
       "params": [
@@ -4563,10 +4595,11 @@
           ]
         }
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Stores an object in the chain blockstore.",
       "x-cu-cost": 1
     },
     {
+      "description": "Reads IPLD nodes referenced by the specified CID from the chain blockstore and returns raw bytes.",
       "name": "Filecoin.ChainReadObj",
       "paramStructure": "by-position",
       "params": [
@@ -4603,7 +4636,7 @@
         },
         "summary": ""
       },
-      "summary": "There are not yet any comments for this method.",
+      "summary": "Reads raw IPLD data from the chain blockstore by CID.",
       "x-cu-cost": 1
     },
     {
