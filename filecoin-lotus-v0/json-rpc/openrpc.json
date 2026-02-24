@@ -518,10 +518,10 @@
             "$ref": "#/components/schemas/Hash32"
           },
           "fromBlock": {
-            "$ref": "#/components/schemas/BlockNumberOrTagParam"
+            "$ref": "#/components/schemas/BlockNumberOrTag"
           },
           "toBlock": {
-            "$ref": "#/components/schemas/BlockNumberOrTagParam"
+            "$ref": "#/components/schemas/BlockNumberOrTag"
           },
           "topics": {
             "$ref": "#/components/schemas/EthFilterTopics"
@@ -675,6 +675,19 @@
           "$ref": "#/components/schemas/EthTraceBlock"
         },
         "type": "array"
+      },
+      "EthTraceItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "action": { "$ref": "#/components/schemas/EthTraceAction" },
+          "result": { "$ref": "#/components/schemas/EthTraceResult" },
+          "type": { "type": "string" },
+          "error": { "type": "string" },
+          "subtraces": { "type": "integer" },
+          "traceAddress": { "$ref": "#/components/schemas/TraceAddress" }
+        },
+        "required": ["action", "type", "subtraces", "traceAddress"]
       },
       "EthTraceReplayBlockTransaction": {
         "additionalProperties": false,
