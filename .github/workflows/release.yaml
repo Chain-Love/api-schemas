@@ -57,21 +57,21 @@ jobs:
           VERSION=$(cat ${{ matrix.api }}/VERSION)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Resolve spec file
+      - name: Resolve spec assets
         id: spec
         shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
           API="${{ matrix.api }}"
           API_TYPE=$(echo "$API" | cut -d/ -f2)
 
           case "$API_TYPE" in
             json-rpc)
-              SPEC_FILE="openrpc.json"
+              ASSET_PATTERN="openrpc-v*.json"
               ;;
             rest-api)
-              SPEC_FILE="openapi.json"
+              ASSET_PATTERN="openapi-v*.json"
               ;;
             *)
               echo "Unknown API type: $API_TYPE"
@@ -79,26 +79,29 @@ jobs:
               ;;
           esac
 
-          FULL_PATH="$API/$SPEC_FILE"
+          mapfile -t ASSETS < <(find "$API" -maxdepth 1 -type f -name "$ASSET_PATTERN" | sort)
 
-          if [[ ! -f "$FULL_PATH" ]]; then
-            echo "ERROR: Spec file not found: $FULL_PATH"
+
+          if [[ ${#ASSETS[@]} -eq 0 ]]; then
+            echo "ERROR: No spec assets found for $API"
             exit 1
           fi
 
-          echo "spec_file=$FULL_PATH" >> "$GITHUB_OUTPUT"
+          echo "assets<<EOF" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "${ASSETS[@]}" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
           echo "api_type=$API_TYPE" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ASSETS: ${{ steps.spec.outputs.assets }}
         run: |
-          set -e
+          set -euo pipefail
 
           API="${{ matrix.api }}"
           VERSION="${{ steps.version.outputs.version }}"
-          SPEC_FILE="${{ steps.spec.outputs.spec_file }}"
 
           BLOCKCHAIN=$(echo "$API" | cut -d/ -f1)
           API_TYPE=$(echo "$API" | cut -d/ -f2)
@@ -125,8 +128,10 @@ jobs:
             exit 0
           fi
 
+          mapfile -t ASSET_FILES <<< "$ASSETS"
+
           gh release create "$TAG" \
-            "$SPEC_FILE" \
+            "${ASSET_FILES[@]}" \
             "$API/CHANGELOG.md" \
             --title "$TAG" \
             --notes "$NOTES"

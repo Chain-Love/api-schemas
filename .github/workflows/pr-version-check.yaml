@@ -45,7 +45,7 @@ jobs:
           CHANGED=$(git diff --name-only "$BASE" "$HEAD")
 
           while IFS= read -r API; do
-            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/(openrpc|openapi)\.json" || true)
+            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/(openrpc|openapi)-v[0-9]+\.json" || true)
             VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/VERSION" || true)
 
             if [[ -n "$SPEC_CHANGED" && -z "$VERSION_CHANGED" ]]; then
@@ -81,8 +81,17 @@ jobs:
 
           while IFS= read -r API; do
             if [[ "$API" == */json-rpc ]]; then
-              npx @redocly/cli@2.15.0 lint "$API/openrpc.json"
+              mapfile -t SPECS < <(find "$API" -maxdepth 1 -type f -name 'openrpc-v*.json' | sort)
             else
-              npx @redocly/cli@2.15.0 lint "$API/openapi.json"
+              mapfile -t SPECS < <(find "$API" -maxdepth 1 -type f -name 'openapi-v*.json' | sort)
             fi
+
+            if [[ ${#SPECS[@]} -eq 0 ]]; then
+              echo "ERROR: No spec files found for $API"
+              exit 1
+            fi
+
+            for SPEC in "${SPECS[@]}"; do
+              npx @redocly/cli@2.15.0 lint "$SPEC"
+            done
           done <<< "$APIS"
