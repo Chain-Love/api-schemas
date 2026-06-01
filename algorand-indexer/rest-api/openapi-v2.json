@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Algorand-Indexer REST API v2 Method Pricing Overrides",
+    "description": "Partial method pricing layer. Methods omitted from this file inherit their nearest definition from a lower method version.",
+    "version": "0.0.2",
+    "contact": {
+      "name": "devs",
+      "email": "devs@chain.love"
+    }
+  },
+  "paths": {
+    "/v2/accounts/{account-id}": {
+      "get": {
+        "description": "Lookup account information.",
+        "operationId": "lookupAccountByID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "x-cu-cost": 4
+      }
+    }
+  }
+}
