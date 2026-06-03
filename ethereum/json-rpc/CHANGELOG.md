@@ -4,6 +4,13 @@ All notable changes to this schema are documented in this file.
 
 The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follows [Semantic Versioning](https://semver.org/)
 
+## [0.0.3] - 2026-06-03
+
+### Changed
+
+- Added partial v3 pricing update for `eth_getBalance`.
+- Added v2 pricing snapshot with updated `eth_call` and `eth_getLogs` CU costs.
+
 ## [0.0.2] - 2026-05-15
 
 ### Changed
