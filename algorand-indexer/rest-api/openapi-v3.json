@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Algorand-Indexer REST API v3 Method Pricing Overrides",
+    "description": "Partial method pricing layer. Methods omitted from this file inherit their nearest definition from a lower method version.",
+    "version": "0.0.3",
+    "contact": {
+      "name": "devs",
+      "email": "devs@chain.love"
+    }
+  },
+  "paths": {
+    "/v2/accounts/{account-id}": {
+      "get": {
+        "description": "Lookup account information.",
+        "operationId": "lookupAccountByID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "x-cu-cost": 8
+      }
+    },
+    "/v2/transactions": {
+      "get": {
+        "description": "Search for transactions.",
+        "operationId": "searchForTransactions",
+        "parameters": [
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "x-cu-cost": 6
+      }
+    },
+    "/v2/accounts/{account-id}/pending-transactions": {
+      "get": {
+        "description": "Lookup pending transactions for an account.",
+        "operationId": "lookupAccountPendingTransactions",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "account-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "x-cu-cost": 3
+      }
+    },
+    "/v2/applications/{application-id}/state": {
+      "get": {
+        "description": "Lookup indexed application state.",
+        "operationId": "lookupApplicationStateByID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application-id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "x-cu-cost": 5
+      }
+    }
+  }
+}
