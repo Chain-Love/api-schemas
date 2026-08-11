@@ -4,6 +4,12 @@ All notable changes to this schema are documented in this file.
 
 The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follows [Semantic Versioning](https://semver.org/)
 
+## [0.0.4] - 2026-08-11
+
+### Changed
+
+- Removed v2 and v3 specs as they were for testing.
+
 ## [0.0.3] - 2026-06-03
 
 ### Changed
