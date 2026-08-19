@@ -23,7 +23,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getBlockSigner",
@@ -38,7 +39,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSigners",
@@ -67,7 +69,8 @@
           },
           "required": false
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSignersAnnotated",
@@ -96,7 +99,8 @@
           },
           "required": false
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSignersAtHash",
@@ -111,7 +115,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSignersAtHashAnnotated",
@@ -126,7 +131,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSignersAtNumber",
@@ -155,7 +161,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSnapshot",
@@ -184,7 +191,8 @@
           },
           "required": false
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_getSnapshotAtHash",
@@ -199,17 +207,20 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_produceBlock",
       "description": "Forces Clique block producer to produce a new block.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_proposals",
       "description": "Retrieves the current proposals the node is voting on.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "clique_propose",
@@ -232,7 +243,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_deleteChainSlice",
@@ -256,12 +268,14 @@
           },
           "required": false
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getBadBlocks",
       "description": "Returns a list of invalid blocks.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getBlockRlp",
@@ -290,7 +304,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getBlockRlpByHash",
@@ -305,7 +320,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getChainLevel",
@@ -320,7 +336,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getConfigValue",
@@ -334,7 +351,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getRawBlock",
@@ -363,7 +381,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getRawHeader",
@@ -392,7 +411,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getRawReceipts",
@@ -421,7 +441,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getRawTransaction",
@@ -436,12 +457,14 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_getSyncStage",
       "description": "Retrieves Nethermind sync stage with extra metadata.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_insertReceipts",
@@ -482,7 +505,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_migrateReceipts",
@@ -497,7 +521,8 @@
           },
           "required": true
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_resetHead",
@@ -513,7 +538,8 @@
             "description": "32-byte block hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_standardTraceBadBlockToFile",
@@ -644,7 +670,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_standardTraceBlockToFile",
@@ -775,7 +802,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceBlock",
@@ -906,7 +934,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceBlockByHash",
@@ -1037,7 +1066,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceBlockByNumber",
@@ -1168,7 +1198,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceCall",
@@ -1413,7 +1444,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceTransaction",
@@ -1544,7 +1576,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceTransactionByBlockAndIndex",
@@ -1685,7 +1718,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceTransactionByBlockhashAndIndex",
@@ -1826,7 +1860,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceTransactionInBlockByHash",
@@ -1967,7 +2002,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "debug_traceTransactionInBlockByIndex",
@@ -2108,17 +2144,20 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_blobBaseFee",
       "description": "Returns the base fee per blob gas in wei.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_blockNumber",
       "description": "Returns the current block number.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_call",
@@ -2301,12 +2340,14 @@
             "description": "Map of account addresses to override objects."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_chainId",
       "description": "Returns the chain ID.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_createAccessList",
@@ -2445,7 +2486,8 @@
             "description": "Whether to optimize the generated access list."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_estimateGas",
@@ -2628,7 +2670,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_feeHistory",
@@ -2669,12 +2712,14 @@
             "description": "Array of percentile values in ascending order."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_gasPrice",
       "description": "Returns the current gas price.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getAccount",
@@ -2700,7 +2745,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBalance",
@@ -2726,7 +2772,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBlockByHash",
@@ -2751,7 +2798,8 @@
             "description": "Whether to include full transaction objects in the block response."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBlockByNumber",
@@ -2776,7 +2824,8 @@
             "description": "Whether to include full transaction objects in the block response."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBlockReceipts",
@@ -2792,7 +2841,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBlockTransactionCountByHash",
@@ -2808,7 +2858,8 @@
             "description": "32-byte block hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getBlockTransactionCountByNumber",
@@ -2824,7 +2875,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getCode",
@@ -2850,7 +2902,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getFilterChanges",
@@ -2866,7 +2919,8 @@
             "description": "Filter identifier as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getFilterLogs",
@@ -2882,7 +2936,8 @@
             "description": "Filter identifier as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getLogs",
@@ -2959,7 +3014,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getProof",
@@ -2999,7 +3055,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getRawTransactionByHash",
@@ -3015,7 +3072,8 @@
             "description": "32-byte transaction hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getStorageAt",
@@ -3051,7 +3109,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getTransactionByBlockHashAndIndex",
@@ -3077,7 +3136,8 @@
             "description": "Transaction index as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getTransactionByBlockNumberAndIndex",
@@ -3103,7 +3163,8 @@
             "description": "Transaction index as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getTransactionByHash",
@@ -3119,7 +3180,8 @@
             "description": "32-byte transaction hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getTransactionCount",
@@ -3145,7 +3207,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getTransactionReceipt",
@@ -3161,7 +3224,8 @@
             "description": "32-byte transaction hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getUncleByBlockHashAndIndex",
@@ -3187,7 +3251,8 @@
             "description": "Uncle index as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getUncleByBlockNumberAndIndex",
@@ -3213,7 +3278,8 @@
             "description": "Uncle index as a hex-encoded quantity."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getUncleCountByBlockHash",
@@ -3229,7 +3295,8 @@
             "description": "32-byte block hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_getUncleCountByBlockNumber",
@@ -3245,12 +3312,14 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_newBlockFilter",
       "description": "Creates a filter to notify when new blocks arrive.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_newFilter",
@@ -3327,22 +3396,26 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_newPendingTransactionFilter",
       "description": "Creates a filter to notify when new pending transactions arrive.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_pendingTransactions",
       "description": "Returns the pending transactions list.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_protocolVersion",
       "description": "Returns ETH protocol version.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_sendRawTransaction",
@@ -3358,7 +3431,8 @@
             "description": "Raw signed transaction as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_sendTransaction",
@@ -3478,7 +3552,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_simulateV1",
@@ -3734,47 +3809,56 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "eth_syncing",
       "description": "Returns the syncing status.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "net_listening",
       "description": "Returns true if the client is actively listening for network connections.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "net_localAddress",
       "description": "Returns the node's local address.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "net_localEnode",
       "description": "Returns the node's local enode URI.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "net_peerCount",
       "description": "Returns the number of connected peers.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "net_version",
       "description": "Returns the current network ID.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_clearEngineSigner",
       "description": "Clears the currently configured engine signer.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_enode",
       "description": "Returns the node enode URI.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_getBlockReceipts",
@@ -3790,12 +3874,14 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_netPeers",
       "description": "Returns connected peers. Peers with non-empty protocols have completed handshake.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_pendingTransactions",
@@ -3949,7 +4035,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_setEngineSigner",
@@ -3974,7 +4061,8 @@
             "description": "Account passphrase."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "parity_setEngineSignerSecret",
@@ -3990,7 +4078,8 @@
             "description": "32-byte private key as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "proof_getTransactionByHash",
@@ -4015,7 +4104,8 @@
             "description": "Whether to include serialized block headers in the response."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "proof_getTransactionReceipt",
@@ -4040,7 +4130,8 @@
             "description": "Whether to include serialized block headers in the response."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_block",
@@ -4056,7 +4147,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_call",
@@ -4258,7 +4350,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_callMany",
@@ -4412,7 +4505,8 @@
             "description": "Block number as a hex-encoded quantity, block hash, or one of the supported block tags."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 20
     },
     {
       "name": "trace_filter",
@@ -4467,7 +4561,8 @@
             }
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_get",
@@ -4497,7 +4592,8 @@
             "description": "Array of zero-based trace indices representing the trace address path."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_rawTransaction",
@@ -4532,7 +4628,8 @@
             "description": "One or more trace output types."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_replayBlockTransactions",
@@ -4567,7 +4664,8 @@
             "description": "One or more trace output types."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_replayTransaction",
@@ -4602,7 +4700,8 @@
             "description": "One or more trace output types."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "trace_transaction",
@@ -4618,27 +4717,32 @@
             "description": "32-byte transaction hash as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     },
     {
       "name": "txpool_content",
       "description": "Returns tx pool content.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "txpool_inspect",
       "description": "Returns detailed information about tx pool transactions.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "txpool_status",
       "description": "Returns tx pool status.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "web3_clientVersion",
       "description": "Returns the current client version.",
-      "params": []
+      "params": [],
+      "x-cu-cost": 1
     },
     {
       "name": "web3_sha3",
@@ -4654,7 +4758,8 @@
             "description": "Binary data as a 0x-prefixed hex string."
           }
         }
-      ]
+      ],
+      "x-cu-cost": 1
     }
   ]
 }
