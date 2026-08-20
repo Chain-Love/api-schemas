@@ -4,6 +4,12 @@ All notable changes to this schema are documented in this file.
 
 The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follows [Semantic Versioning](https://semver.org/)
 
+## [0.0.3] - 2026-08-20
+
+### Added
+
+- Added eth_getBlockReceipts and Filecoin.ChainNotify.
+
 ## [0.0.2] - 2026-05-15
 
 ### Changed
