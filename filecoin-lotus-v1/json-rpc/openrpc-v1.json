@@ -10,6 +10,81 @@
   },
   "methods": [
     {
+      "description": "Returns a channel with chain head updates; the first message is guaranteed to be of length 1 and type \"current\".",
+      "name": "Filecoin.ChainNotify",
+      "paramStructure": "by-position",
+      "params": [],
+      "result": {
+        "description": "Chain head change notifications (stream-like).",
+        "name": "[]HeadChange",
+        "required": true,
+        "schema": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/HeadChangeList"
+            }
+          ],
+          "examples": [
+            [
+              {
+                "Type": "current",
+                "Val": {
+                  "Blocks": null,
+                  "Cids": null,
+                  "Height": 0
+                }
+              }
+            ]
+          ]
+        },
+        "summary": ""
+      },
+      "summary": "Returns a channel providing chain head updates.",
+      "x-cu-cost": 1
+    },
+    {
+      "description": "Returns an array of transaction receipts for every transaction in the block specified by block number (hex) or block hash (0x-prefixed).",
+      "name": "eth_getBlockReceipts",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "description": "Block identifier (hex block number or 0x-prefixed block hash)",
+          "name": "p1",
+          "required": true,
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BlockNumberOrHash"
+              }
+            ],
+            "examples": [
+              "0x10d4f"
+            ]
+          },
+          "summary": ""
+        }
+      ],
+      "result": {
+        "description": "Array of transaction receipts in the block.",
+        "name": "[]ethtypes.EthTxReceipt",
+        "required": true,
+        "schema": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/EthTxReceiptList"
+            }
+          ]
+        },
+        "summary": ""
+      },
+      "summary": "Get all transaction receipts for a block",
+      "x-auth": [
+        "api-keyAuth"
+      ],
+      "x-alias-of": "Filecoin.EthGetBlockReceipts",
+      "x-cu-cost": 1
+    },
+    {
       "description": "```go\nfunc (s *GatewayStruct) EthAccounts(p0 context.Context) ([]ethtypes.EthAddress, error) {\n\tif s.Internal.EthAccounts == nil {\n\t\treturn *new([]ethtypes.EthAddress), ErrNotSupported\n\t}\n\treturn s.Internal.EthAccounts(p0)\n}\n```",
       "externalDocs": {
         "description": "Github remote link",
