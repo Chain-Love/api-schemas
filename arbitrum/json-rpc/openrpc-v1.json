@@ -1756,7 +1756,8 @@
                                 "schema": {
                                         "$ref": "#/components/schemas/Integer"
                                 }
-                        }
+                        },
+                        "x-cu-cost": 1
                 },
                 {
                         "name": "eth_mining",

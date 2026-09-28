@@ -68,5 +68,4 @@ For example, a method without a price reports:
 arbitrum/json-rpc/openrpc-v1.json: eth_maxPriorityFeePerGas: required field x-cu-cost is missing
 ```
 
-That price is currently missing in the repository and must be agreed and added
-before validation can pass. The validator does not assign prices automatically.
+The validator does not assign prices automatically.

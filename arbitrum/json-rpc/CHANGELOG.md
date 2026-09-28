@@ -10,6 +10,10 @@ The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follo
 
 - Added a stable root-level `x-api-id` UUID to identify this API independently of configuration names for per-key method permissions.
 
+### Fixed
+
+- Added the missing `x-cu-cost` of 1 CU for `eth_maxPriorityFeePerGas`.
+
 ## [0.0.2] - 2026-05-15
 
 ### Changed
