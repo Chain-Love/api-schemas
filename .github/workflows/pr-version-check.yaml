@@ -2,15 +2,37 @@ name: PR API Checks
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
 
 jobs:
+  validate-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Test spec validator
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
+
+      - name: Validate all API specs and stable identities
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: python3 scripts/validate_specs.py --base-ref "$BASE"
+
   api-check:
     runs-on: ubuntu-latest
 
     env:
       BASE: ${{ github.event.pull_request.base.sha }}
-      HEAD: ${{ github.event.pull_request.head.sha }}
+      REDOCLY_TELEMETRY: 'off'
 
     steps:
       - uses: actions/checkout@v4
@@ -23,11 +45,10 @@ jobs:
         run: |
           set -euo pipefail
 
-          CHANGED=$(git diff --name-only "$BASE" "$HEAD")
+          CHANGED=$(git diff --name-only "$BASE" HEAD)
 
-          APIS=$(echo "$CHANGED" \
-            | grep -E '.*/(json-rpc|rest-api)/' \
-            | awk -F/ '{print $1"/"$2}' \
+          APIS=$(printf '%s\n' "$CHANGED" \
+            | awk -F/ 'NF >= 3 && ($2 == "json-rpc" || $2 == "rest-api") {print $1"/"$2}' \
             | sort -u)
 
           echo "apis<<EOF" >> "$GITHUB_OUTPUT"
@@ -35,18 +56,17 @@ jobs:
           echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Enforce VERSION bump on spec change
+        env:
+          APIS: ${{ steps.detect.outputs.apis }}
         shell: bash
         run: |
           set -euo pipefail
 
-          APIS="${{ steps.detect.outputs.apis }}"
           [[ -z "$APIS" ]] && exit 0
 
-          CHANGED=$(git diff --name-only "$BASE" "$HEAD")
-
           while IFS= read -r API; do
-            SPEC_CHANGED=$(echo "$CHANGED" | grep -E "$API/(openrpc|openapi)-v[0-9]+\.json" || true)
-            VERSION_CHANGED=$(echo "$CHANGED" | grep -E "$API/VERSION" || true)
+            SPEC_CHANGED=$(git diff --name-only "$BASE" HEAD -- "$API/openrpc-v*.json" "$API/openapi-v*.json")
+            VERSION_CHANGED=$(git diff --name-only "$BASE" HEAD -- "$API/VERSION")
 
             if [[ -n "$SPEC_CHANGED" && -z "$VERSION_CHANGED" ]]; then
               echo "ERROR: Spec changed but VERSION not updated for $API"
@@ -55,11 +75,12 @@ jobs:
           done <<< "$APIS"
 
       - name: Enforce CHANGELOG section for version
+        env:
+          APIS: ${{ steps.detect.outputs.apis }}
         shell: bash
         run: |
           set -euo pipefail
 
-          APIS="${{ steps.detect.outputs.apis }}"
           [[ -z "$APIS" ]] && exit 0
 
           while IFS= read -r API; do
@@ -71,12 +92,19 @@ jobs:
             fi
           done <<< "$APIS"
 
+      - uses: actions/setup-node@v7
+        if: steps.detect.outputs.apis != ''
+        with:
+          node-version: '22'
+          package-manager-cache: false
+
       - name: Lint OpenAPI / OpenRPC
+        env:
+          APIS: ${{ steps.detect.outputs.apis }}
         shell: bash
         run: |
           set -euo pipefail
 
-          APIS="${{ steps.detect.outputs.apis }}"
           [[ -z "$APIS" ]] && exit 0
 
           while IFS= read -r API; do
@@ -92,6 +120,6 @@ jobs:
             fi
 
             for SPEC in "${SPECS[@]}"; do
-              npx @redocly/cli@2.15.0 lint "$SPEC"
+              npx --yes @redocly/cli@2.15.0 lint "$SPEC"
             done
           done <<< "$APIS"
