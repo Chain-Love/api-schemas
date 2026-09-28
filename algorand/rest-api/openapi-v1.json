@@ -1,4 +1,5 @@
 {
+  "x-api-id": "c8a48cb9-7c08-473a-8241-e844cacbb8a2",
   "openapi": "3.0.1",
   "info": {
     "title": "Algorand REST API Specification",

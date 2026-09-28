@@ -6,8 +6,37 @@ on:
     paths:
       - '**/json-rpc/**'
       - '**/rest-api/**'
+      - 'scripts/**'
+      - '.github/workflows/**'
+      - 'redocly.yaml'
+
+permissions:
+  contents: read
 
 jobs:
+  validate-specs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Validate all API specs before publishing
+        env:
+          BEFORE: ${{ github.event.before }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$BEFORE" == 0000000000000000000000000000000000000000 ]]; then
+            python3 scripts/validate_specs.py
+          else
+            python3 scripts/validate_specs.py --base-ref "$BEFORE"
+          fi
+
   detect:
     runs-on: ubuntu-latest
     outputs:
@@ -20,24 +49,27 @@ jobs:
 
       - id: matrix
         shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
         run: |
-          set -e
+          set -euo pipefail
 
-          BEFORE="${{ github.event.before }}"
-          AFTER="${{ github.sha }}"
+          if [[ "$BEFORE" == 0000000000000000000000000000000000000000 ]]; then
+            BEFORE=$(git hash-object -t tree /dev/null)
+          fi
 
           CHANGED=$(git diff --name-only "$BEFORE" "$AFTER")
 
-          MATRIX=$(echo "$CHANGED" \
-            | grep -E '.*/(json-rpc|rest-api)/VERSION' \
-            | awk -F/ '{print $1"/"$2}' \
+          MATRIX=$(printf '%s\n' "$CHANGED" \
+            | awk -F/ 'NF == 3 && ($2 == "json-rpc" || $2 == "rest-api") && $3 == "VERSION" {print $1"/"$2}' \
             | sort -u \
             | jq -R -s -c 'split("\n")[:-1]')
 
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
 
   release:
-    needs: detect
+    needs: [detect, validate-specs]
     if: needs.detect.outputs.matrix != '[]'
     runs-on: ubuntu-latest
     permissions:
@@ -47,6 +79,9 @@ jobs:
       matrix:
         api: ${{ fromJson(needs.detect.outputs.matrix) }}
 
+    env:
+      API: ${{ matrix.api }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -54,7 +89,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          VERSION=$(cat ${{ matrix.api }}/VERSION)
+          VERSION=$(cat "$API/VERSION")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Resolve spec assets
@@ -63,7 +98,6 @@ jobs:
         run: |
           set -euo pipefail
 
-          API="${{ matrix.api }}"
           API_TYPE=$(echo "$API" | cut -d/ -f2)
 
           case "$API_TYPE" in
@@ -97,11 +131,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ASSETS: ${{ steps.spec.outputs.assets }}
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-
-          API="${{ matrix.api }}"
-          VERSION="${{ steps.version.outputs.version }}"
 
           BLOCKCHAIN=$(echo "$API" | cut -d/ -f1)
           API_TYPE=$(echo "$API" | cut -d/ -f2)

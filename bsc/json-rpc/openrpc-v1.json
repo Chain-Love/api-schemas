@@ -1,4 +1,5 @@
 {
+        "x-api-id": "1a8b2c86-0d9f-4f41-b81a-a34612c1a1c8",
         "openrpc": "1.2.4",
         "info": {
                 "title": "BSC JSON-RPC Specification",
