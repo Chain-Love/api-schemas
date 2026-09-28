@@ -58,8 +58,9 @@ do not require an API version bump or cause empty API detection to fail.
 
 The release workflow validates the entire catalog against the preceding main
 commit before any release is published. Its release job depends on successful
-validation; no validation failures are downgraded to warnings. Existing Redocly
-structural and reference checks remain in the PR workflow.
+validation; no validation failures are downgraded to warnings. Redocly structural
+checks remain in the PR workflow; unresolved reference and unused component
+checks are disabled for imported upstream specifications.
 
 Errors identify the file and method/field and appear as GitHub Actions annotations.
 For example, a method without a price reports:
