@@ -14566,9 +14566,7 @@
                     "type": "number"
                   },
                   "Key": {
-                    "media": {
-                      "binaryEncoding": "base64"
-                    },
+                    "contentEncoding": "base64",
                     "type": "string"
                   },
                   "PowerTable": {
@@ -14610,9 +14608,7 @@
               "type": "array"
             },
             "Signature": {
-              "media": {
-                "binaryEncoding": "base64"
-              },
+              "contentEncoding": "base64",
               "type": "string"
             },
             "Signers": {
@@ -14730,9 +14726,7 @@
                     "type": "number"
                   },
                   "Key": {
-                    "media": {
-                      "binaryEncoding": "base64"
-                    },
+                    "contentEncoding": "base64",
                     "type": "string"
                   },
                   "PowerTable": {
@@ -14774,9 +14768,7 @@
               "type": "array"
             },
             "Signature": {
-              "media": {
-                "binaryEncoding": "base64"
-              },
+              "contentEncoding": "base64",
               "type": "string"
             },
             "Signers": {

@@ -12591,9 +12591,7 @@
               "type": "number"
             },
             "Return": {
-              "media": {
-                "binaryEncoding": "base64"
-              },
+              "contentEncoding": "base64",
               "type": "string"
             }
           },
