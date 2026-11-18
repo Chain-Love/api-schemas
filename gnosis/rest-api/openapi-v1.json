@@ -1,4 +1,5 @@
 {
+  "x-api-id": "e7cd1cff-4f17-4896-b384-18d672521325",
   "openapi": "3.1.0",
   "info": {
     "title": "Gnosis Beacon Node REST API Specification",

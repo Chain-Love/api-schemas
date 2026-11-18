@@ -1,4 +1,5 @@
 {
+  "x-api-id": "73098ce9-74c4-4864-978a-4d9b0989f939",
   "openrpc": "1.2.4",
   "info": {
     "title": "Gnosis JSON-RPC Specification",

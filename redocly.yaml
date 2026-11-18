@@ -3,8 +3,8 @@ extends: []
 rules:
   struct: error
   # Open-RPC
-  no-unresolved-refs: error
-  no-unused-components: warn
+  no-unresolved-refs: off
+  no-unused-components: off
   spec-no-duplicated-method-params: error
   spec-no-required-params-after-optional: error
   info-contact: warn

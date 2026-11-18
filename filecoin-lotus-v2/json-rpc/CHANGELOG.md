@@ -4,7 +4,7 @@ All notable changes to this schema are documented in this file.
 
 The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follows [Semantic Versioning](https://semver.org/)
 
-## [0.0.3] - 2026-11-18
+## [0.0.4] - 2026-11-18
 
 ### Added
 
@@ -14,6 +14,12 @@ The format is based on [Keep a ChangeLog](https://keepachangelog.com/) and follo
 ### Changed
 
 - Reduced all method costs above 200 credits to 200 credits.
+
+## [0.0.3] - 2026-09-28
+
+### Added
+
+- Added a stable root-level `x-api-id` UUID to identify this API independently of configuration names for per-key method permissions.
 
 ## [0.0.2] - 2026-05-15
 

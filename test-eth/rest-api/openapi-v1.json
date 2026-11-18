@@ -1,4 +1,5 @@
 {
+  "x-api-id": "6fa5c609-b2e3-4043-87cb-0300e6e8db7f",
   "openapi": "3.1.0",
   "info": {
     "title": "Test Eth Beacon Node REST API Specification",
